@@ -8,24 +8,11 @@ import { ConfigurationFactory } from '../configuration-factory';
 
 export class DevelopmentConfigurationFactory extends ConfigurationFactory {
     tsConfigFile: string
-    mainEntryPointFile: string
-    vendorEntryPointFile: string
-    basicStyleFile: string
-    utilStyleFile: string
-    sharedStyleFile: string
 
     constructor(settings: Settings, finder: Finder) {
         super(settings, finder);
-        this.defineFiles();
-    }
 
-    defineFiles() {
         this.tsConfigFile = join(this.settings.dirs.context, './tsconfig.json');
-        this.mainEntryPointFile = join(this.settings.dirs.ui.project, './app.ts');
-        this.vendorEntryPointFile = join(this.settings.dirs.ui.project, './vendor.ts');
-        this.basicStyleFile = join(this.settings.dirs.ui.project, './styles/basics.scss');
-        this.utilStyleFile = join(this.settings.dirs.ui.project, './styles/utils.scss');
-        this.sharedStyleFile = join(this.settings.dirs.ui.project, './styles/shared.scss');
     }
 
     findComponentEntryPoints(): string[] {
@@ -81,16 +68,16 @@ export class DevelopmentConfigurationFactory extends ConfigurationFactory {
 
     getAppEntryPoint(): any {
         return [
-            this.mainEntryPointFile,
-            this.basicStyleFile,
+            join(this.settings.dirs.ui.project, './app.ts'),
+            join(this.settings.dirs.ui.project, './styles/basic.scss'),
             ...this.findComponentEntryPoints(),
-            this.utilStyleFile
+            join(this.settings.dirs.ui.project, './styles/util.scss')
         ]
     }
 
     getVendorEntryPoint(): any {
         return [
-            this.vendorEntryPointFile
+            join(this.settings.dirs.ui.project, './vendor.ts')
         ]
     }
 
@@ -125,7 +112,7 @@ export class DevelopmentConfigurationFactory extends ConfigurationFactory {
     getSassResourcesLoaderOptions(): any {
         return {
             resources: [
-                this.sharedStyleFile,
+                join(this.settings.dirs.ui.project, './styles/shared.scss'),
                 ...this.findComponentStyles()
             ]
         }
