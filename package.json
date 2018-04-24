@@ -8,7 +8,11 @@
     "url": "https://spryker.com/"
   },
   "license": "MIT",
-  "main": "./dist",
+  "main": "dist/index.js",
+  "repository": {
+    "url": "git@github.com:spryker-shop/suite-frontend-builder.git",
+    "type": "git"
+  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
