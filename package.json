@@ -1,0 +1,40 @@
+{
+  "name": "@spryker/suite-frontend-builder",
+  "version": "0.1.0",
+  "description": "Spryker Suite frontend builder",
+  "author": {
+    "name": "Spryker Systems GmbH",
+    "email": "info@spryker.com",
+    "url": "https://spryker.com/"
+  },
+  "license": "MIT",
+  "main": "./dist",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "prepublishOnly": "tsc"
+  },
+  "engines": {
+    "node": ">=8.9.0",
+    "npm": ">=5.6.0"
+  },
+  "dependencies": {
+    "autoprefixer": "~8.3.0",
+    "clean-webpack-plugin": "~0.1.19",
+    "css-loader": "~0.28.10",
+    "fast-glob": "~2.2.0",
+    "mini-css-extract-plugin": "~0.4.0",
+    "node-sass": "~4.8.3",
+    "optimize-css-assets-webpack-plugin": "~4.0.0",
+    "postcss-loader": "~2.1.3",
+    "sass-loader": "~7.0.1",
+    "sass-resources-loader": "~1.3.3",
+    "ts-loader": "~4.2.0",
+    "typescript": "~2.8.1",
+    "uglifyjs-webpack-plugin": "~1.2.4",
+    "webpack": "~4.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "~9.6.6"
+  }
+}
