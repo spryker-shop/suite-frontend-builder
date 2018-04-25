@@ -71,9 +71,9 @@ const context = process.cwd();
 
 const paths = {
     public: './public/Yves/assets',
-    shop: './vendor/spryker/spryker-shop',
+    shop: './vendor/spryker-shop',
     ui: {
-        shop: `./vendor/spryker/spryker-shop/Bundles/ShopUi/src/SprykerShop/Yves/ShopUi/Theme/${theme}`,
+        shop: `./vendor/spryker-shop/shop-ui/src/SprykerShop/Yves/ShopUi/Theme/${theme}`,
         project: `./src/Pyz/Yves/ShopUi/Theme/${theme}`
     }
 };
