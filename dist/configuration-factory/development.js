@@ -19,17 +19,9 @@ var DevelopmentConfigurationFactory = (function (_super) {
     __extends(DevelopmentConfigurationFactory, _super);
     function DevelopmentConfigurationFactory(settings, finder) {
         var _this = _super.call(this, settings, finder) || this;
-        _this.defineFiles();
+        _this.tsConfigFile = path_1.join(_this.settings.dirs.context, './tsconfig.json');
         return _this;
     }
-    DevelopmentConfigurationFactory.prototype.defineFiles = function () {
-        this.tsConfigFile = path_1.join(this.settings.dirs.context, './tsconfig.json');
-        this.mainEntryPointFile = path_1.join(this.settings.dirs.ui.project, './app.ts');
-        this.vendorEntryPointFile = path_1.join(this.settings.dirs.ui.project, './vendor.ts');
-        this.basicStyleFile = path_1.join(this.settings.dirs.ui.project, './styles/basics.scss');
-        this.utilStyleFile = path_1.join(this.settings.dirs.ui.project, './styles/utils.scss');
-        this.sharedStyleFile = path_1.join(this.settings.dirs.ui.project, './styles/shared.scss');
-    };
     DevelopmentConfigurationFactory.prototype.findComponentEntryPoints = function () {
         process.stdout.write('Scanning for component entry points... ');
         var files = this.finder.find(this.settings.find.componentEntryPoints);
@@ -75,15 +67,15 @@ var DevelopmentConfigurationFactory = (function (_super) {
     };
     DevelopmentConfigurationFactory.prototype.getAppEntryPoint = function () {
         return [
-            this.mainEntryPointFile,
-            this.basicStyleFile
+            path_1.join(this.settings.dirs.ui.project, './app.ts'),
+            path_1.join(this.settings.dirs.ui.project, './styles/basic.scss')
         ].concat(this.findComponentEntryPoints(), [
-            this.utilStyleFile
+            path_1.join(this.settings.dirs.ui.project, './styles/util.scss')
         ]);
     };
     DevelopmentConfigurationFactory.prototype.getVendorEntryPoint = function () {
         return [
-            this.vendorEntryPointFile
+            path_1.join(this.settings.dirs.ui.project, './vendor.ts')
         ];
     };
     DevelopmentConfigurationFactory.prototype.getTSLoaderOptions = function () {
@@ -113,7 +105,7 @@ var DevelopmentConfigurationFactory = (function (_super) {
     DevelopmentConfigurationFactory.prototype.getSassResourcesLoaderOptions = function () {
         return {
             resources: [
-                this.sharedStyleFile
+                path_1.join(this.settings.dirs.ui.project, './styles/shared.scss')
             ].concat(this.findComponentStyles())
         };
     };

@@ -1,7 +1,7 @@
 {
   "name": "@spryker/suite-frontend-builder",
-  "version": "0.1.1",
-  "description": "Spryker Suite frontend builder",
+  "version": "0.1.2",
+  "description": "Spryker Suite Frontend Builder",
   "author": {
     "name": "Spryker Systems GmbH",
     "email": "info@spryker.com",
