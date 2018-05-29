@@ -2,12 +2,14 @@
     "compilerOptions": {
         "baseUrl": ".",
         "outDir": "./dist",
+        "declaration": true,
         "sourceMap": true,
         "noImplicitAny": false,
         "module": "commonjs",
         "moduleResolution": "node",
         "removeComments": true,
-        "target": "es5",
+        "preserveConstEnums": true,
+        "target": "es6",
         "lib": [
             "es2017"
         ]

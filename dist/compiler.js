@@ -1,28 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var webpack = require("webpack");
-var Compiler = (function () {
-    function Compiler(factory) {
-        this.configuration = factory.createConfiguration();
+const webpack = require("webpack");
+function compile(config) {
+    console.log(`Building for ${config.mode}...`);
+    if (config.watch) {
+        console.log('Watch mode: ON');
     }
-    Compiler.prototype.run = function () {
-        var _this = this;
-        console.log("Building for " + this.configuration.mode + "...");
-        if (this.configuration.watch) {
-            console.log('Watch mode: ON');
-        }
-        webpack(this.configuration, function (err, stats) {
-            if (err) {
-                console.error(err.stack || err);
-                if (err.details) {
-                    console.error(err.details);
-                }
-                return;
+    webpack(config, (err, stats) => {
+        if (err) {
+            console.error(err.stack || err);
+            if (err.details) {
+                console.error(err.details);
             }
-            console.log(stats.toString(_this.configuration.stats), '\n');
-        });
-    };
-    return Compiler;
-}());
-exports.Compiler = Compiler;
+            return;
+        }
+        console.log(stats.toString(config.stats), '\n');
+    });
+}
+exports.compile = compile;
 //# sourceMappingURL=compiler.js.map

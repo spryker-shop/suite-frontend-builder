@@ -7,23 +7,24 @@ export interface FinderSettings {
     globSettings?: IPartialOptions
 }
 
-export class Finder {
-    find(settings: FinderSettings): string[] {
-        const globSettings: IPartialOptions = {
-            followSymlinkedDirectories: false,
-            absolute: true,
-            onlyFiles: true,
-            onlyDirectories: false,
+const defaultGlobSettings: IPartialOptions = {
+    followSymlinkedDirectories: false,
+    absolute: true,
+    onlyFiles: true,
+    onlyDirectories: false
+}
 
-            ...settings.globSettings || {}
-        };
+export function find(settings: FinderSettings): string[] {
+    const globSettings: IPartialOptions = {
+        ...defaultGlobSettings,
+        ...settings.globSettings || {}
+    };
 
-        return <string[]>settings.dirs.reduce((results: string[], dir: string) => [
-            ...results,
-            ...sync(settings.patterns, {
-                ...globSettings,
-                cwd: dir
-            })
-        ], []);
-    }
+    return <string[]>settings.dirs.reduce((results: string[], dir: string) => [
+        ...results,
+        ...sync(settings.patterns, {
+            ...globSettings,
+            cwd: dir
+        })
+    ], []);
 }

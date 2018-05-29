@@ -2,9 +2,10 @@ import * as webpack from 'webpack';
 import * as autoprefixer from 'autoprefixer';
 import * as UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import * as OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import { DevelopmentConfigurationFactory } from './development';
+import { DefaultMode, register, get } from '../registry';
+import { ConfigFactoryConstructor } from '../config-factory';
 
-export class ProductionConfigurationFactory extends DevelopmentConfigurationFactory {
+export default <ConfigFactoryConstructor>register(DefaultMode.PRODUCTION, () => class extends get(DefaultMode.DEVELOPMENT) {
     getGlobalVariables(): any {
         return {
             __NAME__: `'${this.settings.name}'`,
@@ -47,17 +48,17 @@ export class ProductionConfigurationFactory extends DevelopmentConfigurationFact
         }
     }
 
-    createConfiguration(): any {
-        const configuration = super.createConfiguration();
+    create(): any {
+        const config = super.create();
 
         return {
-            ...configuration,
+            ...config,
 
             mode: 'production',
             devtool: false,
 
             optimization: {
-                ...configuration.optimization,
+                ...config.optimization,
 
                 minimizer: [
                     new UglifyJsPlugin(this.getUglifyJsPluginOptions()),
@@ -66,4 +67,4 @@ export class ProductionConfigurationFactory extends DevelopmentConfigurationFact
             }
         };
     }
-}
+})

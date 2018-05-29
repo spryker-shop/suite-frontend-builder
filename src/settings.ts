@@ -1,23 +1,25 @@
+import { join } from 'path';
 import { FinderSettings } from './finder';
 
-export interface RelativePaths {
+export interface Paths {
     public: string,
-    shop: string,
-    ui: {
-        shop: string,
-        project: string
+
+    core: {
+        modules: string
+        shopUiModule: string
+    }
+
+    project: {
+        modules: string
+        shopUiModule: string
     }
 }
 
-export interface AbsolutePaths extends RelativePaths {
-    context: string
-}
-
 export interface Settings {
-    name: string,
-    theme: string,
-    paths: RelativePaths,
-    dirs: AbsolutePaths,
+    name: string
+    theme: string
+    context: string
+    paths: Paths
     find: {
         componentEntryPoints: FinderSettings,
         componentStyles: FinderSettings

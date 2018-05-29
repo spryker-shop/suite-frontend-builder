@@ -1,32 +1,23 @@
 import * as webpack from 'webpack';
-import { ConfigurationFactory } from './configuration-factory';
 
-export class Compiler {
-    configuration: any
+export function compile(config: any): void {
+    console.log(`Building for ${config.mode}...`);
 
-    constructor(factory: ConfigurationFactory) {
-        this.configuration = factory.createConfiguration();
+    if (config.watch) {
+        console.log('Watch mode: ON');
     }
 
-    run() {
-        console.log(`Building for ${this.configuration.mode}...`);
+    webpack(config, (err, stats) => {
+        if (err) {
+            console.error(err.stack || err);
 
-        if (this.configuration.watch) {
-            console.log('Watch mode: ON');
-        }
-
-        webpack(this.configuration, (err, stats) => {
-            if (err) {
-                console.error(err.stack || err);
-
-                if (err.details) {
-                    console.error(err.details);
-                }
-
-                return;
+            if (err.details) {
+                console.error(err.details);
             }
 
-            console.log(stats.toString(this.configuration.stats), '\n');
-        });
-    }
+            return;
+        }
+
+        console.log(stats.toString(config.stats), '\n');
+    });
 }

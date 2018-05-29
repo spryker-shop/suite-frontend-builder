@@ -1,12 +1,39 @@
-import { Finder } from './finder';
-import { Compiler } from './compiler';
+import { find } from './finder';
+import { compile } from './compiler';
 import { Settings } from './settings';
-import { ConfigurationFactoryConstructor } from './configuration-factory';
+import { Mode, register, get } from './registry';
+import { ConfigFactoryConstructor } from './config-factory';
 
-export function build(settings: Settings, ConfigurationFactory: ConfigurationFactoryConstructor) {
-    const finder = new Finder();
-    const configurationFactory = new ConfigurationFactory(settings, finder);
-    const compiler = new Compiler(configurationFactory);
+import Base from './config-factory/base';
+import Development from './config-factory/development';
+import DevelopmentWatch from './config-factory/development-watch';
+import Production from './config-factory/production';
 
-    compiler.run();
+function getWebpackConfig(settings: Settings, mode: Mode): any {
+    const ConfigFactory = get(mode);
+    const configFactory = new ConfigFactory(settings);
+    return configFactory.create();
+}
+
+export function build(settings: Settings, mode: Mode): void {
+    const config = getWebpackConfig(settings, mode);
+    compile(config);
+}
+
+export const util = {
+    find,
+    compile,
+    getWebpackConfig
+}
+
+export const factory = {
+    register,
+    get,
+
+    default: {
+        Base,
+        Development,
+        DevelopmentWatch,
+        Production
+    }
 }
