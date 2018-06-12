@@ -53,17 +53,22 @@ exports.default = registry_1.register(registry_1.DefaultMode.DEVELOPMENT, () => 
             __PRODUCTION__: false
         };
     }
+    getES6PolyfillEntryPoint() {
+        return [
+            path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './es6-polyfill.ts')
+        ];
+    }
+    getVendorEntryPoint() {
+        return [
+            path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './vendor.ts')
+        ];
+    }
     getAppEntryPoint() {
         return [
             path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './app.ts'),
             path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/basic.scss'),
             ...this.findComponentEntryPoints(),
             path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/util.scss')
-        ];
-    }
-    getVendorEntryPoint() {
-        return [
-            path_1.join(this.settings.context, this.settings.paths.project.shopUiModule, './vendor.ts')
         ];
     }
     getTSLoaderOptions() {
@@ -126,8 +131,9 @@ exports.default = registry_1.register(registry_1.DefaultMode.DEVELOPMENT, () => 
                 modules: false,
                 entrypoints: false
             }, entry: {
-                app: this.getAppEntryPoint(),
-                vendor: this.getVendorEntryPoint()
+                'es6-polyfill': this.getES6PolyfillEntryPoint(),
+                'vendor': this.getVendorEntryPoint(),
+                'app': this.getAppEntryPoint()
             }, output: {
                 path: path_1.join(this.settings.context, this.settings.paths.public),
                 filename: `./js/${this.settings.name}.[name].js`,

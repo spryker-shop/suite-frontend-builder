@@ -66,18 +66,24 @@ export default <ConfigFactoryConstructor>register(DefaultMode.DEVELOPMENT, () =>
         }
     }
 
-    getAppEntryPoint(): any {
+    getES6PolyfillEntryPoint(): any {
         return [
-            join(this.settings.context, this.settings.paths.project.shopUiModule, './app.ts'),
-            join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/basic.scss'),
-            ...this.findComponentEntryPoints(),
-            join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/util.scss')
+            join(this.settings.context, this.settings.paths.project.shopUiModule, './es6-polyfill.ts')
         ]
     }
 
     getVendorEntryPoint(): any {
         return [
             join(this.settings.context, this.settings.paths.project.shopUiModule, './vendor.ts')
+        ]
+    }
+
+    getAppEntryPoint(): any {
+        return [
+            join(this.settings.context, this.settings.paths.project.shopUiModule, './app.ts'),
+            join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/basic.scss'),
+            ...this.findComponentEntryPoints(),
+            join(this.settings.context, this.settings.paths.project.shopUiModule, './styles/util.scss')
         ]
     }
 
@@ -159,8 +165,9 @@ export default <ConfigFactoryConstructor>register(DefaultMode.DEVELOPMENT, () =>
             },
 
             entry: {
-                app: this.getAppEntryPoint(),
-                vendor: this.getVendorEntryPoint()
+                'es6-polyfill': this.getES6PolyfillEntryPoint(),
+                'vendor': this.getVendorEntryPoint(),
+                'app': this.getAppEntryPoint()
             },
 
             output: {
