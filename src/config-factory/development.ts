@@ -185,7 +185,7 @@ export default <ConfigFactoryConstructor>register(DefaultMode.DEVELOPMENT, () =>
             resolveLoader: {
                 modules: [
                     'node_modules',
-                    'node_modules/@spryker/shop-frontend-builder/node_modules'
+                    'node_modules/@spryker/suite-frontend-builder/node_modules'
                 ]
             },
 

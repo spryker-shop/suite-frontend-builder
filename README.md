@@ -16,8 +16,6 @@ Add this as a dev dependency in your `package.json`:
 npm install --save-dev @spryker/suite-frontend-builder
 ```
 
-### Usage in Spryker Suite
-
 #### 1. Add project folder
 
 Create/update the folder `./src/Pyz/Yves/ShopUi/Theme/default` by adding these files:
