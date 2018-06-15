@@ -3,11 +3,12 @@ import { compile } from './compiler';
 import { Settings } from './settings';
 import { Mode, register, get } from './registry';
 import { ConfigFactoryConstructor } from './config-factory';
+declare function getWebpackConfig(settings: Settings, mode: Mode): any;
 export declare function build(settings: Settings, mode: Mode): void;
 export declare const util: {
     find: typeof find;
     compile: typeof compile;
-    getWebpackConfig: (settings: Settings, mode: string) => any;
+    getWebpackConfig: typeof getWebpackConfig;
 };
 export declare const factory: {
     register: typeof register;
@@ -19,3 +20,4 @@ export declare const factory: {
         Production: ConfigFactoryConstructor;
     };
 };
+export {};

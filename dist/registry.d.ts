@@ -6,7 +6,7 @@ export declare enum DefaultMode {
     BASE = "base",
     DEVELOPMENT = "development",
     DEVELOPMENT_WATCH = "development-watch",
-    PRODUCTION = "production",
+    PRODUCTION = "production"
 }
 export declare type Mode = DefaultMode | string;
 export declare function register(mode: Mode, importer: ConfigFactoryConstructorImporter): ConfigFactoryConstructor;
