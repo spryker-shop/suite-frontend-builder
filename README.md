@@ -3,6 +3,9 @@
 This tool is needed to build the frontend for **Spryker Suite** projects.
 It's based on `webpack` 4, `sass` and `typescript`.
 
+**DEPRECATED** 
+**This functionality has been moved to the ShopUi module.**
+
 ## Requirements
 
 - `nodejs` >= 8.9
